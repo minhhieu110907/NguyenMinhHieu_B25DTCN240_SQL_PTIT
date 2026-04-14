@@ -1,8 +1,7 @@
--- 1. TẠO DATABASE VÀ CHỌN ĐỂ SỬ DỤNG
 CREATE DATABASE IF NOT EXISTS hackathon;
 USE hackathon;
 
--- 2. TẠO CÁC BẢNG (Rút gọn các ràng buộc phức tạp, chỉ giữ lại Khóa chính & Khóa ngoại)
+
 CREATE TABLE Creator (
     creator_id VARCHAR(10) PRIMARY KEY,
     name VARCHAR(50),
@@ -55,14 +54,13 @@ INSERT INTO Payment (session_id, amount, method) VALUES
 (2, 900, 'Card'),
 (3, 300, 'Cash');
 
--- 4. TRUY VẤN CƠ BẢN (Dễ ghi điểm)
+
 -- Liệt kê Creator dùng Tiktok
 SELECT * FROM Creator WHERE platform = 'Tiktok';
 
 -- Sắp xếp Studio theo giá giảm dần
 SELECT * FROM Studio ORDER BY price_per_hour DESC;
 
--- 5. TRUY VẤN NÂNG CAO (Để lấy điểm 10)
 -- Kết hợp bảng: Xem ai đã thuê Studio nào và bao lâu
 SELECT Creator.name, Studio.name, LiveSession.duration
 FROM LiveSession
@@ -74,6 +72,5 @@ SELECT method, SUM(amount) AS Total
 FROM Payment
 GROUP BY method;
 
--- Tìm Studio có giá thuê cao nhất (Sử dụng Subquery đơn giản)
 SELECT * FROM Studio 
 WHERE price_per_hour = (SELECT MAX(price_per_hour) FROM Studio);
